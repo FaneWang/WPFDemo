@@ -27,7 +27,8 @@ namespace CommandDemo1
         }
 
         //创建命令
-        private RoutedCommand command = new RoutedCommand("New", typeof(MainWindow));
+        //private RoutedCommand command = new RoutedCommand("Ver", typeof(MainWindow));
+        private RoutedUICommand command = new RoutedUICommand("create a new element", "Create", typeof(MainWindow));
 
         //初始化命令的方法
         private void InitializeCommmand()

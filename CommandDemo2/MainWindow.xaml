@@ -1,0 +1,47 @@
+﻿<Window x:Class="CommandDemo2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CommandDemo2"
+        mc:Ignorable="d" Background="Azure"
+        Title="MainWindow" Height="350" Width="485">
+    <Window.Resources>
+        <CommandBinding x:Key="binding" Command="local:CustomCommands.Requery"
+          Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute" />
+    </Window.Resources>
+
+    <Grid Margin="5" Background="Beige" >
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="115"/>
+            <RowDefinition Height="115"/>
+        </Grid.RowDefinitions>
+        
+        <!--注意这里，如果存在两个文本框的情况下，为两个文本框分别绑定同一个命令关联，而不是绑定到window上，
+        button必须使用ToolBar包裹才可以使用，否则一直处于禁用状态，什么原理暂时不太清楚-->
+        <ToolBarTray Grid.Row="0" Margin="10,10,18.4,10">
+            <ToolBar Margin="11,10,-430,-70" RenderTransformOrigin="0.5,0.5">
+                <Button x:Name="button1" Content="Requery" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="81" Command="local:CustomCommands.Requery" Margin="0,10,0,0" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <TextBox HorizontalAlignment="Left" Height="70" 
+                 Margin="10,10.2,0,0" Grid.Row="2" TextWrapping="Wrap" AcceptsReturn="True"
+                 VerticalAlignment="Top" Width="440" TextChanged="txt_TextChanged">
+            <TextBox.CommandBindings>
+                <StaticResource ResourceKey="binding"/>
+            </TextBox.CommandBindings>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="95" 
+                 Margin="10,10.4,0,0" Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True"
+                 VerticalAlignment="Top" Width="440" TextChanged="txt_TextChanged">
+            <TextBox.CommandBindings>
+                <StaticResource ResourceKey="binding"/>
+            </TextBox.CommandBindings>
+        </TextBox>
+        
+    </Grid>
+    
+</Window>
